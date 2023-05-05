@@ -1,0 +1,116 @@
+=>I have implemented Blog website using react ,nodejs and mongoDB db 
+Front-end part :
+* It has functional components.
+* I have used react-router-dom installed to set routing between pages 
+* 1.Pages such as Login page ,Register and Home page
+* When we logged in it will take us to home page
+* When i click blog it'gonna open single post 
+* Setting we can update account 
+* Created nodejs api using mongoDB,We can able register ,login and able to add new post,update and delete them 
+
+Design part :Used google font such as josefins,lora ,varela links in index.html
+Apart from app.js and index.js in src all deleted in public only index.html
+display:flex from css to make them align horizontally
+used fontawesome to get the icons 
+fontawesome cdn link pasted in index.html 
+
+% npm install react-lorem-component -install to get paragraphs 
+
+ font-family: "Varela Round", Arial, Helvetica, sans-serif; 
+
+ In css if you want to give style to first letter in first word we need to give 
+ .singlePostDesc::first-letter{
+
+ }
+
+ Write :medium.com
+ align-self: center to make one element center when you use button in that case 
+
+ home page: it fetching data from mongoDB and display here 
+ Whenever click them it fetching data of single post with the help of post id
+ Once you register and logged into website you can able to see logout and profile picture
+ In Write page : You can choose picture and as well as 
+ Title and story about blog we can edit and delete 
+ When you click on profile picture we can change the profile picture and info
+
+ API :REST api with the help of node js and mongoDBWith the help of API 
+ We can create complete Blog application
+
+ To connect our mongoDB mongoose mongoDB url we need to hide in seperate file so thatinstalled dotenv 
+ To upload images we install multer 
+
+in package,json you need to change "start":"nodemon index.js"  //to run automatically when we made changes 
+npm i nodemon 
+.env file to hide something you don't want to see by others 
+
+to get that MONGOURL from .env file process.env.mongo_url
+=>Created modals and routes 
+in modals => Post,category,user
+in routes =>users(delete or update users),posts(create,delete,update)
+auth ,categories
+We need to create schema's like 
+const userSchema = new mongoose.Schema({
+    //With the help of creating schema we can demostrate how paylaod will be in db 
+}
+,{timestramp:true},
+
+)
+module.exports = mongoose.modal("User",UserSchema );
+
+Now after creating all modals come to routes 
+
+To create router we use express framework 
+const Router = require("express").Router
+we used user modal so impaorted here
+
+In async function use try and catch block 
+if operation can be failed 
+we can catch it in catch block
+
+auth.js 
+
+implamented post method to create user 
+app.post("/register",asyn(req,res)=>{
+  const newUser = new User ({
+    username:req.body.username
+  })
+  const user =await newUser.save();
+})
+res.status(200).json(user)
+
+to call this api in index.js 
+we use app.use("/api/auth",authRoute)
+
+const authRoute = require("./routes/auth)
+export.modules = router;
+
+We used bcrypt package to secure password 
+npm i bcrypt
+
+const bcrypt = require('bcrypt');
+const salt = await bcrypt.genSalt(10);
+        const hashedPass = await bcrypt.hash(req.body.password, salt);
+        Syntax for decrypting password .
+
+        if user id not equal sent user id 
+         if(res.body.userId === req.params.id)
+         req.params.id which will take from url 
+
+
+          const salt = await bcrypt.genSalt(10);
+            req.body.password = await bcrypt.hash(req.body.password,salt);   //previous password
+
+            To get previous password use above by bcrypt method 
+             const updatedUser = await User.findByIdAndUpdate(req.params.id)
+
+             that bove method helps to find id 
+
+             In user we need to update and delete the user with help of id 
+
+             While deleting we still see user's post
+
+             in user.js router update and delete 
+             in auth register and login 
+             in second part we created REST api using mongoDB,node js
+             cross origin resource sharing
+             when react is running on 300 port
